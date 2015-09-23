@@ -1,2 +1,5 @@
 frameworks/boardgamesgdk/.idea/
 *.iml
+frameworks/boardgamesgdk/assets/target/
+frameworks/boardgamesgdk/html/target/
+frameworks/boardgamesgdk/core/target/
