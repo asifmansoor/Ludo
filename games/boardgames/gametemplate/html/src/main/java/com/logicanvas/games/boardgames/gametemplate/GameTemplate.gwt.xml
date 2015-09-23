@@ -1,0 +1,11 @@
+<module rename-to='gametemplate'>
+  <inherits name='playn.Scene'/>
+  <inherits name='GameTemplateAssets'/>
+
+  <source path='core'/>
+  <source path='html'/>
+
+  <public path="resources" />
+
+  <entry-point class='com.logicanvas.games.boardgames.gametemplate.html.GameTemplateHtml'/>
+</module>
