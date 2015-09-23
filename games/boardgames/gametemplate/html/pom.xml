@@ -40,22 +40,28 @@
     </dependency>
 
     <dependency>
-      <groupId>io.playn</groupId>
-      <artifactId>playn-scene</artifactId>
-      <version>${playn.version}</version>
+      <groupId>com.logicanvas.frameworks</groupId>
+      <artifactId>boardgamesgdk-core</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.logicanvas.frameworks</groupId>
+      <artifactId>boardgamesgdk-core</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>sources</classifier>
     </dependency>
 
     <dependency>
-      <groupId>io.playn</groupId>
-      <artifactId>playn-html</artifactId>
-      <version>${playn.version}</version>
+      <groupId>com.logicanvas.frameworks</groupId>
+      <artifactId>boardgamesgdk-html</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
-      <groupId>io.playn</groupId>
-      <artifactId>playn-html</artifactId>
-      <version>${playn.version}</version>
+      <groupId>com.logicanvas.frameworks</groupId>
+      <artifactId>boardgamesgdk-html</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>sources</classifier>
     </dependency>
 

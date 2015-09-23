@@ -1,5 +1,5 @@
 <module rename-to='gametemplate'>
-  <inherits name='playn.Scene'/>
+  <inherits name='com.logicanvas.frameworks.boardgamesgdk.BoardGamesCore'/>
   <inherits name='GameTemplateAssets'/>
 
   <source path='core'/>

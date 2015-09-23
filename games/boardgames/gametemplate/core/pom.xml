@@ -15,9 +15,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.playn</groupId>
-      <artifactId>playn-scene</artifactId>
-      <version>${playn.version}</version>
+      <groupId>com.logicanvas.frameworks</groupId>
+      <artifactId>boardgamesgdk-core</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 

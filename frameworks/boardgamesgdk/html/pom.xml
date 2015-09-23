@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>boardgamesgdk-html</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <name>BoardGamesCore HTML</name>
 
   <properties>
