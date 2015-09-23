@@ -4,3 +4,7 @@ frameworks/boardgamesgdk/assets/target/
 frameworks/boardgamesgdk/html/target/
 frameworks/boardgamesgdk/core/target/
 games/boardgames/gametemplate/.idea/
+games/boardgames/gametemplate/assets/target/
+games/boardgames/gametemplate/html/target/
+games/boardgames/gametemplate/core/target/
+games/boardgames/gametemplate/java/target/
