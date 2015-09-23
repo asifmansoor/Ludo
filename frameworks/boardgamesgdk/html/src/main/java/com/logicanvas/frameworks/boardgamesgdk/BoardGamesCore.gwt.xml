@@ -1,0 +1,11 @@
+<module rename-to='boardgamesgdk'>
+  <inherits name='playn.Scene'/>
+  <inherits name='BoardGamesCoreAssets'/>
+
+  <source path='core'/>
+  <source path='html'/>
+
+  <public path="resources" />
+
+  <entry-point class='com.logicanvas.frameworks.boardgamesgdk.html.BoardGamesCoreHtml'/>
+</module>
