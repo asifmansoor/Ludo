@@ -11,3 +11,6 @@ games/boardgames/gametemplate/java/target/
 games/boardgames/ludo/.idea/
 games/boardgames/ludo/html/target/
 games/boardgames/ludo/android/target/
+games/boardgames/ludo/core/target/
+games/boardgames/ludo/assets/target/
+games/boardgames/gametemplate/android/target/
