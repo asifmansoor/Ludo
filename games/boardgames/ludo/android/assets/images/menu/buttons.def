@@ -1,0 +1,89 @@
+buttons.png
+{
+	playerbutton_blue
+	0
+	0
+	150
+	80
+	0
+	0
+	0
+	0
+}
+{
+	playerbutton_blue_pressed
+	150
+	0
+	150
+	80
+	0
+	0
+	0
+	0
+}
+{
+	playerbutton_red
+	0
+	80
+	150
+	80
+	0
+	0
+	0
+	0
+}
+{
+	playerbutton_red_pressed
+	300
+	0
+	150
+	80
+	0
+	0
+	0
+	0
+}
+{
+	playerbutton_green
+	150
+	80
+	150
+	80
+	0
+	0
+	0
+	0
+}
+{
+	playerbutton_green_pressed
+	0
+	160
+	150
+	80
+	0
+	0
+	0
+	0
+}
+{
+	playerbutton_yellow
+	300
+	80
+	150
+	80
+	0
+	0
+	0
+	0
+}
+{
+	playerbutton_yellow_pressed
+	150
+	160
+	150
+	80
+	0
+	0
+	0
+	0
+}

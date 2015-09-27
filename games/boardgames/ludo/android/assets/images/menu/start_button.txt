@@ -1,0 +1,3 @@
+startbutton_inactive = 0 0 200 100
+startbutton_normal = 0 100 200 100
+startbutton_pressed = 0 200 200 100
