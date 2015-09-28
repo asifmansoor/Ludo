@@ -1,0 +1,8 @@
+playerbutton_blue = 0 0 150 80
+playerbutton_blue_pressed = 0 80 150 80
+playerbutton_green = 0 160 150 80
+playerbutton_green_pressed = 150 0 150 80
+playerbutton_red = 150 80 150 80
+playerbutton_red_pressed = 150 160 150 80
+playerbutton_yellow = 0 240 150 80
+playerbutton_yellow_pressed = 150 240 150 80
