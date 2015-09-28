@@ -16,6 +16,12 @@
   <dependencies>
     <dependency>
       <groupId>com.logicanvas.frameworks</groupId>
+      <artifactId>boardgamesgdk-assets</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.logicanvas.frameworks</groupId>
       <artifactId>boardgamesgdk-core</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
