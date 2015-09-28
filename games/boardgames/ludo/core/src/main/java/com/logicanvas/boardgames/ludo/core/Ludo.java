@@ -3,28 +3,22 @@ package com.logicanvas.boardgames.ludo.core;
 import com.logicanvas.boardgames.ludo.audio.LudoSounds;
 import com.logicanvas.boardgames.ludo.config.GameConfiguration;
 import com.logicanvas.boardgames.ludo.intelligence.*;
-import com.logicanvas.boardgames.ludo.menu.Menu;
-import com.logicanvas.boardgames.ludo.menu.MenuView;
 import com.logicanvas.boardgames.ludo.model.GameData;
 import com.logicanvas.boardgames.ludo.model.PlayerToken;
-import com.logicanvas.boardgames.ludo.utility.CallBack;
-import com.logicanvas.boardgames.ludo.utility.LudoLogger;
-import com.logicanvas.boardgames.ludo.utility.GameTimer;
 import com.logicanvas.boardgames.ludo.view.DiceView;
 import com.logicanvas.boardgames.ludo.view.LudoView;
 import com.logicanvas.boardgames.ludo.view.MainView;
+import com.logicanvas.frameworks.boardgamesgdk.core.BoardGamesBasicCore;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.CallBack;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.GameTimer;
 import playn.core.*;
-import playn.scene.*;
-import playn.scene.Pointer;
-import react.Slot;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Ludo extends SceneGame {
+public class Ludo extends BoardGamesBasicCore {
 
-    private Menu menu;
-    private MenuView menuView;
     private MainView mainView;
     private LudoView boardView;
     private DiceView diceView;
@@ -35,78 +29,13 @@ public class Ludo extends SceneGame {
     private int lastUpdate = 0;
     private GameOriginator gameOriginator;
     private LudoRecorder recorder;
-//    private LudoInput inputHandler;
-//    private LudoText ludoText;
     private LudoSounds ludoSounds;
 
     public Ludo(final Platform plat) {
-        super(plat, 33); // update our "simulation" 33ms (30 times per second)
+        super(plat, 33, GameConfiguration.NO_OF_PLAYERS, GameConfiguration.DEBUG); // update our "simulation" 33ms (30 times per second)
 
-/*
-        if (plat.type() == Platform.Type.JAVA || plat.type() == Platform.Type.HTML) {
-            // setup input
-            plat.input().mouseEvents.connect(new Slot<Mouse.Event>() {
-                @Override
-                public void onEmit(Mouse.Event event) {
-                    if (event instanceof Mouse.ButtonEvent && ((Mouse.ButtonEvent) event).down && gameInProgress) {
-                        if (gameData.getGameState() == GameConfiguration.GAME_STATE.WAITING_FOR_INPUT) {
-                            plat.log().debug("mouse input in Ludo class: " + event.x + " - " + event.y);
-                            processInput(event.x, event.y);
-                        }
-                    }
-                }
-            });
-        } else if (plat.type() == Platform.Type.ANDROID || plat.type() == Platform.Type.IOS) {
 
-            plat.input().touchEvents.connect(new Slot<Touch.Event[]>() {
-                @Override
-                public void onEmit(Touch.Event[] event) {
-                    if (gameInProgress && gameData.getGameState() == GameConfiguration.GAME_STATE.WAITING_FOR_INPUT) {
-                        plat.log().debug("touch input in Ludo class: " + event[0].x + " - " + event[0].y);
-                        processInput(event[0].x, event[0].y);
-                    }
-                }
-            });
-        }
-*/
-
-        Pointer pointer = new Pointer(plat, rootLayer, false);
-//        plat.input().mouseEvents.connect(new Mouse.Dispatcher(rootLayer, false));
-
-        plat.input().keyboardEvents.connect(new Slot<Keyboard.Event>() {
-            @Override
-            public void onEmit(Keyboard.Event event) {
-                try {
-                    Keyboard.TypedEvent keyEvent = (Keyboard.TypedEvent) event;
-                    if (keyEvent != null) {
-                        if (keyEvent.typedChar == 's' || keyEvent.typedChar == 'S') {
-                            // save game
-                            LudoLogger.info("Saving Game...");
-//                            gameOriginator.saveGame();
-                            LudoLogger.info("Saved Game...");
-                        } else if (keyEvent.typedChar == 'r' || keyEvent.typedChar == 'R') {
-                            // load game
-                            LudoLogger.info("Restoring Game...");
-//                            gameOriginator.restoreGame();
-//                            recorder.loadLastGame();
-//                            restoreGame();
-                            LudoLogger.info("Restored Game...");
-                        } else if (keyEvent.typedChar == 'd' || keyEvent.typedChar == 'D') {
-                            //
-                        } else {
-                            gameInProgress = true;
-                            gameUpdate();
-                            //System.out.println("Key event : " + event.toString());
-                            //gameUpdate();
-                        }
-                    }
-                } catch (Exception e) {
-                    //System.out.println("Key error:" + e);
-                }
-            }
-        });
-
-        float aspectRatio = plat.graphics().viewSize.width()/plat.graphics().viewSize.height();
+        float aspectRatio = viewSize.width()/viewSize.height();
         float boardSize;
         // setup board size
         if (aspectRatio >= GameConfiguration.FULL_HEIGHT) {
@@ -149,13 +78,6 @@ public class Ludo extends SceneGame {
         });
 
 
-//        inputHandler = new LudoInput(gameData, boardView);
-        //ludoText = new LudoText(plat.graphics());
-
-        // setup menu
-        menu = new Menu(plat, this);
-        menuView = menu.getView();
-
         mainView = new MainView(plat, boardSize);
         mainView.registerResetButtonListener(new CallBack() {
             @Override
@@ -188,9 +110,11 @@ public class Ludo extends SceneGame {
         showMainView(false);
         rootLayer.add(boardView);
         rootLayer.add(mainView);
-//        rootLayer.add(ludoText);
         rootLayer.add(diceView);
-        rootLayer.add(menuView);
+
+        // setup menu
+        Image gamelogoImage = plat.assets().getImage("images/ludoLogo.jpg");
+        initMenu(gamelogoImage);
     }
 
     private void playDiceAnimation() {
@@ -203,22 +127,9 @@ public class Ludo extends SceneGame {
     private void showMainView(boolean show) {
         boardView.setVisible(show);
         mainView.setVisible(show);
-//        ludoText.setVisible(show);
         diceView.setVisible(show);
         diceView.showDice(3);
     }
-
-/*
-    private void processInput(float x, float y) {
-        if (moveEvaluator.isThereAnyValidMoveForPlayer()) {
-            if (!inputHandler.processInput(x, y)) {
-                ludoSounds.playSound(GameConfiguration.GAME_SOUNDS_INVALID_PICK);
-            }
-        } else {
-            gameData.setGameState(GameConfiguration.GAME_STATE.INPUT_RECD);
-        }
-    }
-*/
 
     private void setPlayerCaptionStrings() {
         String[] text_options = {"OFF", "COMPUTER AI", "PLAYER "};
@@ -246,6 +157,7 @@ public class Ludo extends SceneGame {
         gameData.getPlayer(playerId).setPlayerType(playerType);
     }
 
+    @Override
     public void closeGame() {
         gameData.setGameState(GameConfiguration.GAME_STATE.GAME_END);
         resetGame();
@@ -255,6 +167,7 @@ public class Ludo extends SceneGame {
         showMainView(false);
     }
 
+    @Override
     public void startGame() {
         menuView.setVisible(false);
 
@@ -288,18 +201,14 @@ public class Ludo extends SceneGame {
         LudoPlayer[] players = new LudoPlayer[GameConfiguration.NO_OF_TOKENS_PER_PLAYER];
 
         // setup blue player data
-        players[GameConfiguration.BLUE_PLAYER_ID] = new LudoPlayer(GameConfiguration.BLUE_START_INDEX,
-                GameConfiguration.BLUE_OPEN_INDEX, GameConfiguration.BLUE_HOME_ROW_START_INDEX, GameConfiguration
-                .BLUE_PLAYER_ID, GameConfiguration.PLAYER_TYPE_OFF);
-        players[GameConfiguration.RED_PLAYER_ID] = new LudoPlayer(GameConfiguration.RED_START_INDEX,
-                GameConfiguration.RED_OPEN_INDEX, GameConfiguration.RED_HOME_ROW_START_INDEX, GameConfiguration
-                .RED_PLAYER_ID, GameConfiguration.PLAYER_TYPE_OFF);
-        players[GameConfiguration.GREEN_PLAYER_ID] = new LudoPlayer(GameConfiguration.GREEN_START_INDEX,
-                GameConfiguration.GREEN_OPEN_INDEX, GameConfiguration.GREEN_HOME_ROW_START_INDEX, GameConfiguration
-                .GREEN_PLAYER_ID, GameConfiguration.PLAYER_TYPE_OFF);
-        players[GameConfiguration.YELLOW_PLAYER_ID] = new LudoPlayer(GameConfiguration.YELLOW_START_INDEX,
-                GameConfiguration.YELLOW_OPEN_INDEX, GameConfiguration.YELLOW_HOME_ROW_START_INDEX, GameConfiguration
-                .YELLOW_PLAYER_ID, GameConfiguration.PLAYER_TYPE_OFF);
+        players[GameConfiguration.BLUE_PLAYER_ID] = new LudoPlayer(GameConfiguration.BLUE_PLAYER_ID, GameConfiguration.BLUE_START_INDEX,
+                GameConfiguration.BLUE_OPEN_INDEX, GameConfiguration.BLUE_HOME_ROW_START_INDEX);
+        players[GameConfiguration.RED_PLAYER_ID] = new LudoPlayer(GameConfiguration.RED_PLAYER_ID, GameConfiguration.RED_START_INDEX,
+                GameConfiguration.RED_OPEN_INDEX, GameConfiguration.RED_HOME_ROW_START_INDEX);
+        players[GameConfiguration.GREEN_PLAYER_ID] = new LudoPlayer(GameConfiguration.GREEN_PLAYER_ID, GameConfiguration.GREEN_START_INDEX,
+                GameConfiguration.GREEN_OPEN_INDEX, GameConfiguration.GREEN_HOME_ROW_START_INDEX);
+        players[GameConfiguration.YELLOW_PLAYER_ID] = new LudoPlayer(GameConfiguration.YELLOW_PLAYER_ID, GameConfiguration.YELLOW_START_INDEX,
+                GameConfiguration.YELLOW_OPEN_INDEX, GameConfiguration.YELLOW_HOME_ROW_START_INDEX);
 
         gameData.setPlayers(players);
 
@@ -482,8 +391,8 @@ public class Ludo extends SceneGame {
     }
 
     private void restoreGame() {
-        LudoLogger.debug("Turn :" + gameData.getTurn());
-        LudoLogger.debug("Dice :" + gameData.getDiceRoll());
+        BoardGamesLogger.debug("Turn :" + gameData.getTurn());
+        BoardGamesLogger.debug("Dice :" + gameData.getDiceRoll());
         gameData.getMoveSequence().addSequence(moveEvaluator.evaluateMove());
         playMove();
     }
@@ -507,7 +416,7 @@ public class Ludo extends SceneGame {
     private boolean nextTurn() {
         if (checkGameEnd()) {
             gameData.setGameState(GameConfiguration.GAME_STATE.GAME_END);
-            LudoLogger.log("Game Over!");
+            BoardGamesLogger.log("Game Over!");
             return false;
         } else {
             gameData.setTurn(gameData.getTurn() + 1);
@@ -525,7 +434,7 @@ public class Ludo extends SceneGame {
             if (gameData.getPlayer(gameData.getTurn()).isAllHomeForPlayer() || gameData.getPlayer(gameData.getTurn()).getPlayerType() == GameConfiguration.PLAYER_TYPE_OFF) {
                 nextTurn();
             }
-            LudoLogger.debug("Turn :" + gameData.getTurn());
+            BoardGamesLogger.debug("Turn :" + gameData.getTurn());
             if (gameData.getPlayer(gameData.getTurn()).getPlayerType() == GameConfiguration.PLAYER_TYPE_HUMAN) {
                 mainView.showPlayerMessage(GameConfiguration.playerNames[gameData.getTurn()] + " player turn. Click Dice to roll.");
             } else {

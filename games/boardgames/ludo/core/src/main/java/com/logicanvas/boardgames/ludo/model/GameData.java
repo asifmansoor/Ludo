@@ -3,7 +3,7 @@ package com.logicanvas.boardgames.ludo.model;
 import com.logicanvas.boardgames.ludo.config.GameConfiguration;
 import com.logicanvas.boardgames.ludo.core.LudoPlayer;
 import com.logicanvas.boardgames.ludo.intelligence.MoveSequence;
-import com.logicanvas.boardgames.ludo.utility.LudoLogger;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class GameData {
         if (players != null) {
             return players[playerId];
         } else {
-            LudoLogger.log("Player data not set");
+            BoardGamesLogger.debug("Player data not set");
         }
 
         return null;

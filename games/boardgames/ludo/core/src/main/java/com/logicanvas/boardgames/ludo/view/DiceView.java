@@ -1,17 +1,14 @@
 package com.logicanvas.boardgames.ludo.view;
 
-import com.logicanvas.boardgames.ludo.config.GameConfiguration;
-import com.logicanvas.boardgames.ludo.model.GameData;
 import com.logicanvas.boardgames.ludo.ui.animations.BaseAnimation;
-import com.logicanvas.boardgames.ludo.utility.CallBack;
-import com.logicanvas.boardgames.ludo.utility.GameTimer;
-import com.logicanvas.boardgames.ludo.utility.LudoLogger;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.CallBack;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.GameTimer;
 import playn.core.Image;
 import playn.core.Platform;
 import playn.scene.GroupLayer;
 import playn.scene.ImageLayer;
 import playn.scene.Pointer;
-import playn.scene.RootLayer;
 
 /**
  * Created by amansoor on 06-09-2015.
@@ -93,7 +90,7 @@ public class DiceView extends GroupLayer{
     public void onDieAnimationEnd() {
         showDice(outcome);
         if (callBackOnDiceAnimEnd != null) {
-            LudoLogger.log("DiceView: calling back");
+            BoardGamesLogger.debug("DiceView: calling back");
             callBackOnDiceAnimEnd.call(null);
         }
     }

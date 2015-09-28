@@ -5,8 +5,8 @@ import com.logicanvas.boardgames.ludo.config.GameRules;
 import com.logicanvas.boardgames.ludo.core.LudoPlayer;
 import com.logicanvas.boardgames.ludo.model.GameData;
 import com.logicanvas.boardgames.ludo.model.PlayerToken;
-import com.logicanvas.boardgames.ludo.utility.LudoLogger;
-import com.logicanvas.boardgames.ludo.utility.Utility;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.Utility;
 
 import java.util.ArrayList;
 
@@ -106,7 +106,7 @@ public class MoveEvaluator {
             moveScore = GameConfiguration.POINTS_CAN_OPEN_TOKEN;
             finalLocation = gameData.getPlayer(playerId).getStartLocationIndex();
             gameMove = new GameMove(playerId, tokenIndex, GameMove.OPEN, 0, moveScore, finalLocation);
-            LudoLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
+            BoardGamesLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
                     "outcome: " +
                     "OPEN");
             return gameMove;
@@ -119,7 +119,7 @@ public class MoveEvaluator {
             moveScore = GameConfiguration.POINTS_TOKEN_HOME;
             finalLocation = gameData.getPlayer(playerId).getHomeRowStartIndex() + 5;
             gameMove = new GameMove(playerId, tokenIndex, GameMove.HOME, diceRoll, moveScore, finalLocation);
-            LudoLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
+            BoardGamesLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
                     "outcome: " +
                     "HOME");
             return gameMove;
@@ -130,7 +130,7 @@ public class MoveEvaluator {
             moveScore = GameConfiguration.POINTS_IDLE_TOKEN;
             finalLocation = tokenLocation;
             gameMove = new GameMove(playerId, tokenIndex, GameMove.IDLE, 0, moveScore, finalLocation);
-            LudoLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
+            BoardGamesLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
                     "outcome: IDLE");
             return gameMove;
         } else {
@@ -138,14 +138,14 @@ public class MoveEvaluator {
             int quad = getPlayerTokenQuadrant(tokenIndex);
             finalLocation = getUpdatedLocation(playerId, tokenIndex, diceRoll);
 
-            LudoLogger.debug("situation: playerid : " + playerId + " tokenIndex: " + tokenIndex);
+            BoardGamesLogger.debug("situation: playerid : " + playerId + " tokenIndex: " + tokenIndex);
 
             // calculate scores
             // If rule is off player can enter.If rule is on player can only enter if it has already beaten another
             if (finalLocation >= gameData.getPlayer(playerId).getHomeRowStartIndex()) {
                 // can enter home row
                 moveScore = GameConfiguration.POINTS_CAN_ENTER_HOME_ROW;
-                LudoLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
+                BoardGamesLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
                         "outcome: ENTER HOME ROW");
                 gameMove = new GameMove(playerId, tokenIndex, GameMove.ENTER, finalLocation - gameData.getPlayer(playerId).getHomeRowStartIndex(), moveScore, finalLocation);
                 return gameMove;
@@ -165,41 +165,41 @@ public class MoveEvaluator {
                 if (tokenCanLandOnSafeSpot) {
                     // can land on safe spot
                     opportunityScore += GameConfiguration.POINTS_CAN_LAND_ON_SAFE_SPOT * quad;
-                    LudoLogger.debug(" opportunityScore: " + opportunityScore + " probable outcome: SAFE SPOT");
+                    BoardGamesLogger.debug(" opportunityScore: " + opportunityScore + " probable outcome: SAFE SPOT");
                 } else if (GameRules.doubleUpAdvantageEnabled && checkDoubleUp(tokenIndex, finalLocation)) {
                     // can move to a double up position
                     opportunityScore += GameConfiguration.POINTS_CAN_DOUBLE_UP * quad;
-                    LudoLogger.debug(" opportunityScore: "+ opportunityScore + " probable outcome: DOUBLEUP");
+                    BoardGamesLogger.debug(" opportunityScore: "+ opportunityScore + " probable outcome: DOUBLEUP");
                 }
 
                 if (opponentBehindBeforeMove == null && opponentBehindAfterMove != null && !tokenCanLandOnSafeSpot) {
                     // Threat : If opponent behind after move and token not landing on safe spot
                     threatPerceptionScore += GameConfiguration.POINTS_OPPONENT_BEHIND_BEFORE_AND_AFTER_MOVE * quad;
-                    LudoLogger.debug(" threatPerceptionScore: " + threatPerceptionScore + " probable outcome: If opponent behind after move and token not landing on safe spot");
+                    BoardGamesLogger.debug(" threatPerceptionScore: " + threatPerceptionScore + " probable outcome: If opponent behind after move and token not landing on safe spot");
                 }
 
                 if (opponentBehindAfterMove != null && tokenAlreadyOnSafeSpot) {
                     // Threat : If opponent behind after move and token already on safe spot
                     threatPerceptionScore += GameConfiguration.POINTS_PLAYER_ALREADY_SAFE_SPOT *quad;
-                    LudoLogger.debug(" threatPerceptionScore: " + threatPerceptionScore + " probable outcome: If opponent behind after move and token already on safe spot");
+                    BoardGamesLogger.debug(" threatPerceptionScore: " + threatPerceptionScore + " probable outcome: If opponent behind after move and token already on safe spot");
                 }
 
                 if (opponentBehindBeforeMove != null && opponentBehindAfterMove == null) {
                     // Opportunity : If opponent behind before move and no opponent behind after move
                     opportunityScore += GameConfiguration.POINTS_OPPONENT_BEHIND_BEFORE_MOVE_AND_NOT_AFTER_MOVE * quad;
-                    LudoLogger.debug(" opportunityScore: " + opportunityScore + " probable outcome: If opponent behind before move and no opponent behind after move");
+                    BoardGamesLogger.debug(" opportunityScore: " + opportunityScore + " probable outcome: If opponent behind before move and no opponent behind after move");
                 }
 
                 if (opponentAheadBeforeMove == null && opponentAheadAfterMove != null) {
                     // Opportunity : If no opponent ahead before move and ahead after move
                     opportunityScore += GameConfiguration.POINTS_NO_OPPONENT_AHEAD_BEFORE_AND_OPPONENT_AHEAD_AFTER_MOVE * quad;
-                    LudoLogger.debug(" opportunityScore: " + opportunityScore + " probable outcome: If no opponent ahead before move and ahead after move");
+                    BoardGamesLogger.debug(" opportunityScore: " + opportunityScore + " probable outcome: If no opponent ahead before move and ahead after move");
                 }
 
                 if (opponentAheadBeforeMove != null && opponentAheadAfterMove != null) {
                     // Opportunity : If opponent ahead before move and ahead after move
                     opportunityScore += GameConfiguration.POINTS_OPPONENT_AHEAD_BEFORE_AND_AFTER_MOVE * quad;
-                    LudoLogger.debug(" opportunityScore: " + opportunityScore + " probable outcome: If opponent ahead before move and ahead after move");
+                    BoardGamesLogger.debug(" opportunityScore: " + opportunityScore + " probable outcome: If opponent ahead before move and ahead after move");
                 }
 
 
@@ -207,7 +207,7 @@ public class MoveEvaluator {
                 if (opponentHit != null) {
                     // Opportunity : If opponent getting hit after move
                     opportunityScore += GameConfiguration.POINTS_OPPONENT_AHEAD_BEFORE_MOVE_AND_HIT_AFTER_MOVE * quad;
-                    LudoLogger.debug(" opportunityScore: " + opportunityScore + " probable outcome: If opponent getting hit after move");
+                    BoardGamesLogger.debug(" opportunityScore: " + opportunityScore + " probable outcome: If opponent getting hit after move");
                 }
 
             }
@@ -223,13 +223,13 @@ public class MoveEvaluator {
 
             if (opponentHit != null) {
                 // setup move
-                LudoLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
+                BoardGamesLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
                         "outcome: move and hit");
                 gameMove = new GameMove(playerId, tokenIndex, GameMove.MOVE_AND_HIT, diceRoll, moveScore, finalLocation, opponentHit);
             } else {
 
                 // setup move
-                LudoLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
+                BoardGamesLogger.debug("evaluate: playerid : " + playerId + " tokenIndex: " + tokenIndex + " moveScore: " + moveScore + " " +
                         "outcome: normal move");
                 gameMove = new GameMove(playerId, tokenIndex, GameMove.MOVE, diceRoll, moveScore, finalLocation);
             }
@@ -251,17 +251,17 @@ public class MoveEvaluator {
     private boolean isValidMove(int tokenIndex) {
         if (gameData.getPlayer(gameData.getTurn()).getPlayerToken(tokenIndex).getState() == GameConfiguration.TOKEN_STATE_HOME) {
             // token is home
-            LudoLogger.debug("situation: playerid : " + gameData.getTurn() + " tokenIndex: " + tokenIndex + " outcome: token is already home");
+            BoardGamesLogger.debug("situation: playerid : " + gameData.getTurn() + " tokenIndex: " + tokenIndex + " outcome: token is already home");
             return false;
         } else if ((gameData.getPlayer(gameData.getTurn()).getPlayerToken(tokenIndex).getState() == GameConfiguration.TOKEN_STATE_UNOPEN) && Utility
                 .findInArray(GameRules
                         .tokenOpeningMoves, gameData.getDiceRoll()) == -1) {
             // token is unopen and we don't have an opening move
-            LudoLogger.debug("situation: playerid : " + gameData.getTurn() + " tokenIndex: " + tokenIndex + " outcome: token is unopen and we don't have an opening move");
+            BoardGamesLogger.debug("situation: playerid : " + gameData.getTurn() + " tokenIndex: " + tokenIndex + " outcome: token is unopen and we don't have an opening move");
             return false;
         } else if ((gameData.getPlayer(gameData.getTurn()).getPlayerToken(tokenIndex).getState() != GameConfiguration.TOKEN_STATE_UNOPEN) && !gameData.getPlayer(gameData.getTurn()).tokenHasValidMove(tokenIndex, gameData.getDiceRoll())) {
             // token has no valid move
-            LudoLogger.debug("situation: playerid : " + gameData.getTurn() + " tokenIndex: " + tokenIndex + " outcome: token has no valid move");
+            BoardGamesLogger.debug("situation: playerid : " + gameData.getTurn() + " tokenIndex: " + tokenIndex + " outcome: token has no valid move");
             return false;
         } else {
             return true;
@@ -287,7 +287,7 @@ public class MoveEvaluator {
             return GameConfiguration.quadIndex[playerId][3];
         }
 
-        LudoLogger.error("Unable to get the correct quadrant");
+        BoardGamesLogger.error("Unable to get the correct quadrant");
         return 0;
     }
 

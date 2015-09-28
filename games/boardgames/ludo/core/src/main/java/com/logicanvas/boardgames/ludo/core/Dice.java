@@ -2,7 +2,7 @@ package com.logicanvas.boardgames.ludo.core;
 
 
 import com.logicanvas.boardgames.ludo.config.GameConfiguration;
-import com.logicanvas.boardgames.ludo.utility.LudoLogger;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -37,7 +37,7 @@ public class Dice {
             dice[0] = (int) diceRig.remove(0);
         else
             dice[0] = rng.nextInt(6) + 1;
-        LudoLogger.debug("Dice :" + dice[0]);
+        BoardGamesLogger.debug("Dice :" + dice[0]);
         return dice[0];
     }
 }

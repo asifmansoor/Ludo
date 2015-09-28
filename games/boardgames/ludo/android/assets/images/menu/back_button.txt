@@ -1,3 +1,0 @@
-backbutton_inactive = 0 0 200 100
-backbutton_normal = 0 100 200 100
-backbutton_pressed = 0 200 200 100

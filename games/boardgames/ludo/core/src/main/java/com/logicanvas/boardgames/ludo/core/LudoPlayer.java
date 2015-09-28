@@ -4,32 +4,31 @@ package com.logicanvas.boardgames.ludo.core;
 import com.logicanvas.boardgames.ludo.config.GameConfiguration;
 import com.logicanvas.boardgames.ludo.intelligence.GameMove;
 import com.logicanvas.boardgames.ludo.model.PlayerToken;
-import com.logicanvas.boardgames.ludo.utility.LudoLogger;
+import com.logicanvas.frameworks.boardgamesgdk.core.gameplay.BasicPlayer;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
 
 /**
  * Created by amansoor on 24-08-2015.
  * <p/>
  * This class is to track the various properties of a Ludo Player
  */
-public class LudoPlayer {
+public class LudoPlayer extends BasicPlayer {
 
     public final int startLocationIndex;                  // index of the board start location for the tokens
     public final int openLocationIndex;                   // index of the open location on board
     private int homeRowStartIndex;                        // index of the home row starting position
     private PlayerToken[] playerTokens;                   // token objects for the player
-    private int playerId;                                 // id of the player
-    private int playerType;
     private boolean hasPlayerBeatenAToken = false;        /* flag for check whether player has beaten another player
                                                              or not
                                                            */
     private int playerScore;                              // total score of the player
     private int rank;                                     // rank of the player
 
-    public LudoPlayer(int startLoc, int openLoc, int homeRowStartLoc, int id, int playerType) {
+    public LudoPlayer(int id, int startLoc, int openLoc, int homeRowStartLoc) {
+        super(id);
         startLocationIndex = startLoc;
         openLocationIndex = openLoc;
         homeRowStartIndex = homeRowStartLoc;
-        playerId = id;
         playerScore = 0;
 
         playerTokens = new PlayerToken[GameConfiguration.NO_OF_TOKENS_PER_PLAYER];
@@ -41,9 +40,7 @@ public class LudoPlayer {
             playerTokens[i].setIndex(i);
             playerTokens[i].setPlayerId(playerId);
         }
-
-        this.playerType = playerType;
-    }
+   }
 
     public void resetPlayer() {
         playerScore = 0;
@@ -82,31 +79,31 @@ public class LudoPlayer {
     public void playMove(GameMove gameMove) {
         switch (gameMove.getMoveType()) {
             case GameMove.OPEN:
-                LudoLogger.debug("move: OPEN : playerid: " + playerId + " tokenIndex: " + gameMove.getTokenIndex());
+                BoardGamesLogger.debug("move: OPEN : playerid: " + playerId + " tokenIndex: " + gameMove.getTokenIndex());
                 openToken(gameMove.getTokenIndex());
                 break;
             case GameMove.MOVE:
-                LudoLogger.debug("move: MOVE : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
+                BoardGamesLogger.debug("move: MOVE : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
                 moveToken(gameMove.getTokenIndex(), gameMove.getMoveSteps(), gameMove.getFinalLocation());
                 break;
             case GameMove.MOVE_AND_HIT:
-                LudoLogger.debug("move: MOVE AND HIT : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
+                BoardGamesLogger.debug("move: MOVE AND HIT : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
                 moveAndHitToken(gameMove.getTokenIndex(), gameMove.getMoveSteps(), gameMove.getFinalLocation());
                 break;
             case GameMove.RESET:
-                LudoLogger.debug("move: RESET : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
+                BoardGamesLogger.debug("move: RESET : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
                 resetToken(gameMove.getTokenIndex());
                 break;
             case GameMove.ENTER:
-                LudoLogger.debug("move: ENTER : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
+                BoardGamesLogger.debug("move: ENTER : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
                 enterLastRow(gameMove.getTokenIndex(), gameMove.getMoveSteps());
                 break;
             case GameMove.HOME:
-                LudoLogger.debug("move: HOME : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
+                BoardGamesLogger.debug("move: HOME : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
                 enterTokenHome(gameMove.getTokenIndex(), gameMove.getMoveSteps());
                 break;
             case GameMove.IDLE:
-                LudoLogger.debug("move: IDLE : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
+                BoardGamesLogger.debug("move: IDLE : playerid: "+playerId+" tokenIndex: "+gameMove.getTokenIndex());
                 break;
         }
     }

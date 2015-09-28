@@ -6,7 +6,7 @@ package com.logicanvas.boardgames.ludo.config;
 public class GameConfiguration {
     public static final float FULL_HEIGHT = 1.5f;
     public static final boolean DEBUG = true;
-    public static final boolean RIG_GAME = true;
+    public static final boolean RIG_GAME = false;
     public static final int[] rigList = {6,1,1,6,6,1,1,1,5,1,1,1,5,1,1,1,36,1,1,1,5,1,1,1};
 //    public static final int[] testGameState = {}
 //    public static final int[] rigList = {3,4,6,6};

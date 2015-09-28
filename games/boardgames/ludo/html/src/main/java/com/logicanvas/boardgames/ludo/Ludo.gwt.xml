@@ -1,5 +1,6 @@
 <module rename-to='ludo'>
   <inherits name='playn.Scene'/>
+  <inherits name='com.logicanvas.frameworks.boardgamesgdk.BoardGamesCore'/>
   <inherits name='LudoAssets'/>
 
   <!--source path='ludo'/-->

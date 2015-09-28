@@ -1,8 +1,7 @@
 package com.logicanvas.boardgames.ludo.ui.animations;
 
-import com.logicanvas.boardgames.ludo.config.GameConfiguration;
-import com.logicanvas.boardgames.ludo.utility.CallBack;
-import com.logicanvas.boardgames.ludo.utility.GameTimer;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.CallBack;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.GameTimer;
 import playn.core.Image;
 import playn.scene.GroupLayer;
 import playn.scene.ImageLayer;

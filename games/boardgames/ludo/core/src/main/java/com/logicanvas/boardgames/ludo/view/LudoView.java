@@ -1,8 +1,8 @@
 package com.logicanvas.boardgames.ludo.view;
 
 import com.logicanvas.boardgames.ludo.config.GameConfiguration;
-import com.logicanvas.boardgames.ludo.utility.CallBack;
 import com.logicanvas.boardgames.ludo.ui.Widgets.PlayerWidget;
+import com.logicanvas.frameworks.boardgamesgdk.core.utility.CallBack;
 import playn.core.*;
 import playn.scene.*;
 import pythagoras.f.IDimension;

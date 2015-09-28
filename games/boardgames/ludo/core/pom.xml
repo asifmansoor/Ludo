@@ -24,11 +24,18 @@
       <artifactId>playn-core</artifactId>
       <version>${playn.version}</version>
     </dependency>
-    <!--dependency>
-      <groupId>com.googlecode.playn</groupId>
-      <artifactId>playn-core</artifactId>
-      <version>1.8</version>
-    </dependency-->
+
+    <dependency>
+      <groupId>com.logicanvas.frameworks</groupId>
+      <artifactId>boardgamesgdk-assets</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.logicanvas.frameworks</groupId>
+      <artifactId>boardgamesgdk-core</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>

@@ -1,2 +1,0 @@
-quit = 0 0 50 200
-quit_pressed = 51 0 50 200
