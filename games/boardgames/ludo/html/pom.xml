@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.logicanvas.boardgames</groupId>
+    <groupId>com.logicanvas.games.boardgames</groupId>
     <artifactId>ludo</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
@@ -14,27 +14,27 @@
   <name>Ludo HTML</name>
 
   <properties>
-    <gwt.module>com.logicanvas.boardgames.ludo.Ludo</gwt.module>
+    <gwt.module>com.logicanvas.games.boardgames.ludo.Ludo</gwt.module>
     <gwt.name>ludo</gwt.name>
     <gae.version>1.9.9</gae.version> <!-- Google App Engine SDK version -->
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>com.logicanvas.boardgames</groupId>
+      <groupId>com.logicanvas.games.boardgames</groupId>
       <artifactId>ludo-core</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>com.logicanvas.boardgames</groupId>
+      <groupId>com.logicanvas.games.boardgames</groupId>
       <artifactId>ludo-core</artifactId>
       <version>${project.version}</version>
       <classifier>sources</classifier>
     </dependency>
 
     <dependency>
-      <groupId>com.logicanvas.boardgames</groupId>
+      <groupId>com.logicanvas.games.boardgames</groupId>
       <artifactId>ludo-assets</artifactId>
       <version>${project.version}</version>
     </dependency>
