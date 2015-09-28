@@ -1,0 +1,21 @@
+<module rename-to='ludo'>
+  <inherits name='playn.Scene'/>
+  <inherits name='com.logicanvas.frameworks.boardgamesgdk.BoardGamesCore'/>
+  <inherits name='LudoAssets'/>
+
+  <!--source path='ludo'/-->
+  <source path='audio'/>
+  <source path='config'/>
+  <source path='core'/>
+  <source path='intelligence'/>
+  <source path='menu'/>
+  <source path='model'/>
+  <source path='ui'/>
+  <source path='utility'/>
+  <source path='view'/>
+  <source path='html'/>
+
+  <public path="resources" />
+
+  <entry-point class='com.logicanvas.games.boardgames.ludo.html.LudoHtml'/>
+</module>
