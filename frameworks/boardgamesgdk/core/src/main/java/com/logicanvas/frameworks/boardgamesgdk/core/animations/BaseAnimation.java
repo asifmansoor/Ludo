@@ -18,23 +18,27 @@ public class BaseAnimation extends GroupLayer{
     private int rate;
     private CallBack onEnd;
 
-    public BaseAnimation(Image image, int numberOfFrames, int row, int col, int time, CallBack onEnd) {
+    public BaseAnimation(Image image, int numberOfFrames, int row, int col, int time, float x, float y, float width,
+                         float height, float originalWidth, float originalHeight, CallBack onEnd) {
         this.onEnd = onEnd;
         timeLength = time;
         frames = new ImageLayer[numberOfFrames];
         for (int i = 0; i < numberOfFrames; i++) {
-            int xOffset = i/col;
-            int yOffset = i%col;
-            Image.Region frameRegion = image.region(xOffset*image.width(), yOffset*image.height(), image.width()/row, image.height()/col);
+            int xOffset = i%col;
+            int yOffset = i/col;
+            Image.Region frameRegion = image.region(xOffset*originalWidth/col, yOffset*originalHeight/row, originalHeight/row, originalWidth/col);
             frames[i] = new ImageLayer(frameRegion);
             frames[i].setVisible(false);
+            frames[i].setSize(width, height);
+            frames[i].setTx(x);
+            frames[i].setTy(y);
             this.add(frames[i]);
         }
 
         currentFrameIndex = 0;
         frameStartTime = 0;
         rate = timeLength/frames.length;
-        frames[0].setVisible(true);
+//        frames[2].setVisible(true);
     }
 
     public void play() {

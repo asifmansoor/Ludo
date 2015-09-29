@@ -11,7 +11,8 @@ import java.util.Iterator;
 public class GameTimer {
     private static ArrayList<TimeListener> listOfTimerListeners = new ArrayList<>();
     private static ArrayList<TimeListener> listOfAnimTimerListeners = new ArrayList<>();
-    private static int animListenerCount = -1;
+    private static int currentlistenerId = -1;
+    private static int currentAnimListenerId = -1;
     private static float tick;
 
     public static void update(Clock clock) {
@@ -28,9 +29,8 @@ public class GameTimer {
             }
         }
         if (!listOfAnimTimerListeners.isEmpty()) {
-            Iterator itr = listOfAnimTimerListeners.iterator();
-            while (itr.hasNext()) {
-                TimeListener listener = (TimeListener) itr.next();
+            for (int i = listOfAnimTimerListeners.size() - 1; i >= 0; i--) {
+                TimeListener listener = (TimeListener) listOfAnimTimerListeners.get(i);
                 listener.callBack.call(clock.dt);
             }
         }
@@ -43,32 +43,45 @@ public class GameTimer {
     }
 
     public static void runAfter(float timeInMilliSeconds, CallBack callBack) {
-        TimeListener listener = new TimeListener(tick, timeInMilliSeconds, callBack);
+        currentlistenerId++;
+        TimeListener listener = new TimeListener(currentlistenerId, tick, timeInMilliSeconds, callBack);
         listOfTimerListeners.add(listener);
     }
 
     public static int addAnimListener(CallBack callBack) {
-        ++animListenerCount;
-        TimeListener listener = new TimeListener(tick, callBack);
-        listOfAnimTimerListeners.add(animListenerCount, listener);
-        return animListenerCount;
+        currentAnimListenerId++;
+        TimeListener listener = new TimeListener(currentAnimListenerId, tick, callBack);
+        listOfAnimTimerListeners.add(listener);
+        return currentAnimListenerId;
     }
 
     public static void removeAnimListener(int index) {
-        listOfAnimTimerListeners.remove(index);
+        if (!listOfAnimTimerListeners.isEmpty()) {
+            for (int i = 0; i < listOfAnimTimerListeners.size(); i++) {
+                TimeListener listener = (TimeListener) listOfAnimTimerListeners.get(i);
+                if (listener.timerId == index) {
+                    listOfAnimTimerListeners.remove(i);
+                }
+            }
+        } else {
+            BoardGamesLogger.error("No listener found to be removed");
+        }
     }
 
     private static class TimeListener {
+        private int timerId;
         private float startTime;
         private float timeInMilliSeconds;
         private CallBack callBack;
 
-        public TimeListener(float startTime, CallBack callBack) {
+        public TimeListener(int id, float startTime, CallBack callBack) {
+            timerId = id;
             this.startTime = startTime;
             this.callBack = callBack;
         }
 
-        public TimeListener(float startTime, float timeInMilliSeconds, CallBack callBack) {
+        public TimeListener(int id, float startTime, float timeInMilliSeconds, CallBack callBack) {
+            timerId = id;
             this.startTime = startTime;
             this.timeInMilliSeconds = timeInMilliSeconds;
             this.callBack = callBack;

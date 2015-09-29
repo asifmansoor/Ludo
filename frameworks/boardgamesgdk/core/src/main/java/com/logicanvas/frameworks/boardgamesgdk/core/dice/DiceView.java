@@ -53,12 +53,13 @@ public class DiceView extends GroupLayer{
         this.add(diceLayer);
 
         // setup animations
-        diceAnim = new BaseAnimation(diceImage, 6, 1, 6, 2100, new CallBack() {
+        diceAnim = new BaseAnimation(diceImage, 6, 1, 6, 2100, x, y, width, width, 240, 40, new CallBack() {
             @Override
             public void call(Object data) {
                 onDieAnimationEnd();
             }
         });
+        this.add(diceAnim);
     }
 
     public void hideDice() {
