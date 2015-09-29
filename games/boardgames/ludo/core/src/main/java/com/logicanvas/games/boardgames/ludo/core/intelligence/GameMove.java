@@ -1,6 +1,6 @@
-package com.logicanvas.games.boardgames.ludo.intelligence;
+package com.logicanvas.games.boardgames.ludo.core.intelligence;
 
-import com.logicanvas.games.boardgames.ludo.model.PlayerToken;
+import com.logicanvas.games.boardgames.ludo.core.model.PlayerToken;
 
 /**
  * Created by amansoor on 24-08-2015.

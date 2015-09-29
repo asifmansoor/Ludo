@@ -1,8 +1,8 @@
-package com.logicanvas.games.boardgames.ludo.view;
+package com.logicanvas.games.boardgames.ludo.core.view;
 
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.CallBack;
-import com.logicanvas.games.boardgames.ludo.config.GameConfiguration;
-import com.logicanvas.games.boardgames.ludo.ui.Widgets.PlayerWidget;
+import com.logicanvas.games.boardgames.ludo.core.config.GameConfiguration;
+import com.logicanvas.games.boardgames.ludo.core.ui.Widgets.PlayerWidget;
 import playn.core.Image;
 import playn.core.Platform;
 import playn.scene.GroupLayer;

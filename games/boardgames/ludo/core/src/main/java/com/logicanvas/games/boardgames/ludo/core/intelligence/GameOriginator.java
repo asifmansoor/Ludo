@@ -1,7 +1,7 @@
-package com.logicanvas.games.boardgames.ludo.intelligence;
+package com.logicanvas.games.boardgames.ludo.core.intelligence;
 
 
-import com.logicanvas.games.boardgames.ludo.model.GameData;
+import com.logicanvas.games.boardgames.ludo.core.model.GameData;
 
 /**
  * Created by amansoor on 27-08-2015.

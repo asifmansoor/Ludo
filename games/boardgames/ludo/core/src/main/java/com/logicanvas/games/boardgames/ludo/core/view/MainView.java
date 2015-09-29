@@ -1,10 +1,10 @@
-package com.logicanvas.games.boardgames.ludo.view;
+package com.logicanvas.games.boardgames.ludo.core.view;
 
 import com.logicanvas.frameworks.boardgamesgdk.core.ui.widgets.Buttons.ButtonCreationException;
 import com.logicanvas.frameworks.boardgamesgdk.core.ui.widgets.Buttons.ThreeStateButton;
 import com.logicanvas.frameworks.boardgamesgdk.core.ui.widgets.MessageBar;
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.CallBack;
-import com.logicanvas.games.boardgames.ludo.config.GameConfiguration;
+import com.logicanvas.games.boardgames.ludo.core.config.GameConfiguration;
 import playn.core.Font;
 import playn.core.Image;
 import playn.core.Platform;

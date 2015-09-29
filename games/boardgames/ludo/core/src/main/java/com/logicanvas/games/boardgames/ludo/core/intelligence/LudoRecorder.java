@@ -1,7 +1,7 @@
-package com.logicanvas.games.boardgames.ludo.intelligence;
+package com.logicanvas.games.boardgames.ludo.core.intelligence;
 
-import com.logicanvas.games.boardgames.ludo.config.GameConfiguration;
-import com.logicanvas.games.boardgames.ludo.model.GameData;
+import com.logicanvas.games.boardgames.ludo.core.config.GameConfiguration;
+import com.logicanvas.games.boardgames.ludo.core.model.GameData;
 import playn.core.Platform;
 
 /**

@@ -1,6 +1,6 @@
-package com.logicanvas.games.boardgames.ludo.audio;
+package com.logicanvas.games.boardgames.ludo.core.audio;
 
-import com.logicanvas.games.boardgames.ludo.config.GameConfiguration;
+import com.logicanvas.games.boardgames.ludo.core.config.GameConfiguration;
 import playn.core.Platform;
 import playn.core.Sound;
 

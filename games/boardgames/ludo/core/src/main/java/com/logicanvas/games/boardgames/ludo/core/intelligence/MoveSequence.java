@@ -1,4 +1,4 @@
-package com.logicanvas.games.boardgames.ludo.intelligence;
+package com.logicanvas.games.boardgames.ludo.core.intelligence;
 
 import java.util.ArrayList;
 

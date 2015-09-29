@@ -1,9 +1,9 @@
-package com.logicanvas.games.boardgames.ludo.model;
+package com.logicanvas.games.boardgames.ludo.core.model;
 
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
-import com.logicanvas.games.boardgames.ludo.config.GameConfiguration;
-import com.logicanvas.games.boardgames.ludo.intelligence.LudoPlayer;
-import com.logicanvas.games.boardgames.ludo.intelligence.MoveSequence;
+import com.logicanvas.games.boardgames.ludo.core.config.GameConfiguration;
+import com.logicanvas.games.boardgames.ludo.core.intelligence.LudoPlayer;
+import com.logicanvas.games.boardgames.ludo.core.intelligence.MoveSequence;
 
 import java.util.ArrayList;
 

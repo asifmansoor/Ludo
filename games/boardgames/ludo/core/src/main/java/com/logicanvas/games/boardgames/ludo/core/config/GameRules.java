@@ -1,4 +1,4 @@
-package com.logicanvas.games.boardgames.ludo.config;
+package com.logicanvas.games.boardgames.ludo.core.config;
 
 /**
  * Created by amansoor on 25-06-2015.

@@ -1,4 +1,4 @@
-package com.logicanvas.games.boardgames.ludo.model;
+package com.logicanvas.games.boardgames.ludo.core.model;
 
 /**
  * Created by amansoor on 24-08-2015.

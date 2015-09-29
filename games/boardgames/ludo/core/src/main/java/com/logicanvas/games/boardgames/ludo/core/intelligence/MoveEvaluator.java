@@ -1,11 +1,11 @@
-package com.logicanvas.games.boardgames.ludo.intelligence;
+package com.logicanvas.games.boardgames.ludo.core.intelligence;
 
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.Utility;
-import com.logicanvas.games.boardgames.ludo.config.GameConfiguration;
-import com.logicanvas.games.boardgames.ludo.config.GameRules;
-import com.logicanvas.games.boardgames.ludo.model.GameData;
-import com.logicanvas.games.boardgames.ludo.model.PlayerToken;
+import com.logicanvas.games.boardgames.ludo.core.config.GameConfiguration;
+import com.logicanvas.games.boardgames.ludo.core.config.GameRules;
+import com.logicanvas.games.boardgames.ludo.core.model.GameData;
+import com.logicanvas.games.boardgames.ludo.core.model.PlayerToken;
 
 import java.util.ArrayList;
 

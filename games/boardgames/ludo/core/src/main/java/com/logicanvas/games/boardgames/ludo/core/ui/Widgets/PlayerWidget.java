@@ -1,9 +1,9 @@
-package com.logicanvas.games.boardgames.ludo.ui.Widgets;
+package com.logicanvas.games.boardgames.ludo.core.ui.Widgets;
 
 import com.logicanvas.frameworks.boardgamesgdk.core.ui.widgets.BaseWidget;
 import com.logicanvas.frameworks.boardgamesgdk.core.ui.widgets.MessageBar;
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.CallBack;
-import com.logicanvas.games.boardgames.ludo.config.GameConfiguration;
+import com.logicanvas.games.boardgames.ludo.core.config.GameConfiguration;
 import playn.core.Font;
 import playn.core.Graphics;
 import playn.core.Image;
