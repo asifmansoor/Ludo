@@ -1,10 +1,9 @@
-package com.logicanvas.games.boardgames.ludo.core;
+package com.logicanvas.games.boardgames.ludo.intelligence;
 
 
 import com.logicanvas.frameworks.boardgamesgdk.core.gameplay.BasicPlayer;
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
 import com.logicanvas.games.boardgames.ludo.config.GameConfiguration;
-import com.logicanvas.games.boardgames.ludo.intelligence.GameMove;
 import com.logicanvas.games.boardgames.ludo.model.PlayerToken;
 
 /**

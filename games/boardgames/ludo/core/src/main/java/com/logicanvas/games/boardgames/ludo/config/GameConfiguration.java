@@ -6,21 +6,17 @@ package com.logicanvas.games.boardgames.ludo.config;
 public class GameConfiguration {
     public static final float FULL_HEIGHT = 1.5f;
     public static final boolean DEBUG = true;
-    public static final boolean RIG_GAME = false;
-    public static final int[] rigList = {6,1,1,6,6,1,1,1,5,1,1,1,5,1,1,1,36,1,1,1,5,1,1,1};
-//    public static final int[] testGameState = {}
-//    public static final int[] rigList = {3,4,6,6};
 
     public static final int[][] quadIndex = {{1,2,3,4},{4,1,2,3},{3,4,1,2},{2,3,4,1}};
 
-    public static final int PLAYER_TYPE_OFF = 0;
-    public static final int PLAYER_TYPE_AI_LEVEL1 = 1;
-    public static final int PLAYER_TYPE_HUMAN = 2;
+//    public static final int PLAYER_TYPE_OFF = 0;
+//    public static final int PLAYER_TYPE_AI_LEVEL1 = 1;
+//    public static final int PLAYER_TYPE_HUMAN = 2;
 
     public enum GAME_STATE {START, WAITING_FOR_SPIN, SPIN_DIE, WAITING_FOR_INPUT, INPUT_RECD, PLAY_MOVE, PLAY_END, GAME_END};
 
     public static final String[] playerNames = {"Blue", "Red", "Green", "Yellow"};
-    public static final String[] moveTypeNames = {"Idle", "Open", "Move", "Move&Hit", "Reset", "Enter", "Home"};
+//    public static final String[] moveTypeNames = {"Idle", "Open", "Move", "Move&Hit", "Reset", "Enter", "Home"};
 
     public static final int GAME_SOUNDS_TOKEN_MOVE = 0;
     public static final int GAME_SOUNDS_PLAYER_TOUCH = 1;

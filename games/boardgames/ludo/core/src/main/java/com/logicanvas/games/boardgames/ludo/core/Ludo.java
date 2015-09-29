@@ -1,6 +1,9 @@
 package com.logicanvas.games.boardgames.ludo.core;
 
 import com.logicanvas.frameworks.boardgamesgdk.core.BoardGamesBasicCore;
+import com.logicanvas.frameworks.boardgamesgdk.core.dice.Dice;
+import com.logicanvas.frameworks.boardgamesgdk.core.dice.DiceView;
+import com.logicanvas.frameworks.boardgamesgdk.core.gameplay.BasicPlayer;
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.CallBack;
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.GameTimer;
@@ -9,7 +12,6 @@ import com.logicanvas.games.boardgames.ludo.config.GameConfiguration;
 import com.logicanvas.games.boardgames.ludo.intelligence.*;
 import com.logicanvas.games.boardgames.ludo.model.GameData;
 import com.logicanvas.games.boardgames.ludo.model.PlayerToken;
-import com.logicanvas.games.boardgames.ludo.view.DiceView;
 import com.logicanvas.games.boardgames.ludo.view.LudoView;
 import com.logicanvas.games.boardgames.ludo.view.MainView;
 import playn.core.Clock;
@@ -24,9 +26,9 @@ public class Ludo extends BoardGamesBasicCore {
     private MainView mainView;
     private LudoView boardView;
     private DiceView diceView;
+    private Dice dice;
     private GameData gameData;
     private MoveEvaluator moveEvaluator;
-    private Dice dice;
     private boolean gameInProgress;
     private int lastUpdate = 0;
     private GameOriginator gameOriginator;
@@ -138,7 +140,7 @@ public class Ludo extends BoardGamesBasicCore {
         String text;
         for (int i = 0; i < GameConfiguration.NO_OF_PLAYERS; i++) {
             text = text_options[gameData.getPlayer(i).getPlayerType()];
-            if (gameData.getPlayer(i).getPlayerType() == GameConfiguration.PLAYER_TYPE_HUMAN) {
+            if (gameData.getPlayer(i).getPlayerType() == BasicPlayer.PLAYER_TYPE_HUMAN) {
                 text += i+1;
             }
             boardView.setPlayerCaption(i, text);
@@ -269,7 +271,7 @@ public class Ludo extends BoardGamesBasicCore {
                 if (nextTurn()) {
                     boardView.showPlayerHighlightMarker(gameData.getTurn(), true);
                     gameData.setDiceRoll(dice.oneDiceOutcome());
-                    if (gameData.getPlayer(gameData.getTurn()).getPlayerType() == GameConfiguration.PLAYER_TYPE_HUMAN) {
+                    if (gameData.getPlayer(gameData.getTurn()).getPlayerType() == BasicPlayer.PLAYER_TYPE_HUMAN) {
                         gameData.setGameState(GameConfiguration.GAME_STATE.WAITING_FOR_SPIN);
                     } else {
                         playDiceAnimation();
@@ -322,7 +324,7 @@ public class Ludo extends BoardGamesBasicCore {
     private void postSpinProcessing() {
         mainView.updateDiceCounter(gameData.getDiceRoll());
         // check if input is required
-        if (gameData.getPlayer(gameData.getTurn()).getPlayerType() == GameConfiguration.PLAYER_TYPE_HUMAN) {
+        if (gameData.getPlayer(gameData.getTurn()).getPlayerType() == BasicPlayer.PLAYER_TYPE_HUMAN) {
             GameMove move = moveEvaluator.evaluateMove();
             highlightPlayerTokens();
             if (move.getMoveType() != GameMove.IDLE) {
@@ -351,7 +353,7 @@ public class Ludo extends BoardGamesBasicCore {
         mainView.showPlayerMessage("");
 //        diceView.hideDice();
         boardView.showMask(true);
-        if (gameData.getPlayer(gameData.getTurn()).getPlayerType() == GameConfiguration.PLAYER_TYPE_HUMAN) {
+        if (gameData.getPlayer(gameData.getTurn()).getPlayerType() == BasicPlayer.PLAYER_TYPE_HUMAN) {
             if (moveEvaluator.isThereAnyValidMoveForPlayer()) {
                 move = moveEvaluator.evaluateMove(gameData.getPlayerMove());
                 if (move.getMoveType() == GameMove.IDLE) {
@@ -433,11 +435,11 @@ public class Ludo extends BoardGamesBasicCore {
             }
 */
 
-            if (gameData.getPlayer(gameData.getTurn()).isAllHomeForPlayer() || gameData.getPlayer(gameData.getTurn()).getPlayerType() == GameConfiguration.PLAYER_TYPE_OFF) {
+            if (gameData.getPlayer(gameData.getTurn()).isAllHomeForPlayer() || gameData.getPlayer(gameData.getTurn()).getPlayerType() == BasicPlayer.PLAYER_TYPE_OFF) {
                 nextTurn();
             }
             BoardGamesLogger.debug("Turn :" + gameData.getTurn());
-            if (gameData.getPlayer(gameData.getTurn()).getPlayerType() == GameConfiguration.PLAYER_TYPE_HUMAN) {
+            if (gameData.getPlayer(gameData.getTurn()).getPlayerType() == BasicPlayer.PLAYER_TYPE_HUMAN) {
                 mainView.showPlayerMessage(GameConfiguration.playerNames[gameData.getTurn()] + " player turn. Click Dice to roll.");
             } else {
                 mainView.showPlayerMessage(GameConfiguration.playerNames[gameData.getTurn()] + " player turn.");
@@ -469,15 +471,15 @@ public class Ludo extends BoardGamesBasicCore {
         int inHomeTokens = player.getNumPlayerTokensInState(GameConfiguration.TOKEN_STATE_HOME);
         int unOpenedTokens = player.getNumPlayerTokensInState(GameConfiguration.TOKEN_STATE_UNOPEN);
         switch (player.getPlayerType()) {
-            case GameConfiguration.PLAYER_TYPE_OFF:
+            case BasicPlayer.PLAYER_TYPE_OFF:
                 mainView.showPlayerStats(playerId, GameConfiguration.playerNames[playerId]+ ": OFF");
                 break;
-            case GameConfiguration.PLAYER_TYPE_AI_LEVEL1:
+            case BasicPlayer.PLAYER_TYPE_AI_LEVEL1:
                 mainView.showPlayerStats(playerId, GameConfiguration.playerNames[playerId]+": AI\n\t# home: "
                         +inHomeTokens+"\n\t# unopened: "+unOpenedTokens+"\n\t# on board: "
                         +(GameConfiguration.NO_OF_TOKENS_PER_PLAYER - inHomeTokens - unOpenedTokens));
                 break;
-            case GameConfiguration.PLAYER_TYPE_HUMAN:
+            case BasicPlayer.PLAYER_TYPE_HUMAN:
                 mainView.showPlayerStats(playerId, GameConfiguration.playerNames[playerId]+": Player"+(playerId+1)+"\n\t# home: "
                         +inHomeTokens+"\n\t# unopened: "+unOpenedTokens+"\n\t# on board: "
                         +(GameConfiguration.NO_OF_TOKENS_PER_PLAYER - inHomeTokens - unOpenedTokens));

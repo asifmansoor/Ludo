@@ -4,7 +4,6 @@ import com.logicanvas.frameworks.boardgamesgdk.core.utility.BoardGamesLogger;
 import com.logicanvas.frameworks.boardgamesgdk.core.utility.Utility;
 import com.logicanvas.games.boardgames.ludo.config.GameConfiguration;
 import com.logicanvas.games.boardgames.ludo.config.GameRules;
-import com.logicanvas.games.boardgames.ludo.core.LudoPlayer;
 import com.logicanvas.games.boardgames.ludo.model.GameData;
 import com.logicanvas.games.boardgames.ludo.model.PlayerToken;
 
