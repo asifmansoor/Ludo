@@ -4,7 +4,7 @@
   <parent>
     <groupId>io.playn</groupId>
     <artifactId>playn-project</artifactId>
-    <version>2.0-rc1</version>
+    <version>2.0-rc3</version>
   </parent>
 
   <groupId>com.logicanvas.frameworks</groupId>
@@ -14,7 +14,7 @@
   <name>BoardGamesCore Metaproject</name>
 
   <properties>
-    <playn.version>2.0-rc1</playn.version>
+    <playn.version>2.0-rc3</playn.version>
   </properties>
 
   <profiles>
